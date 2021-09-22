@@ -19,11 +19,30 @@ public class MainPage extends BasePage {
     private WebElement prices;
     @FindBy(css = ".inventory_container > div")
     private WebElement goodsList;
+    @FindBy(css = "button[id*='add-to-cart']")
+    private WebElement addButton;
+    @FindBy(css = ".shopping_cart_badge")
+    private WebElement cartQnt;
 
 
     public MainPage(WebDriver driver) {
         super(driver);
     }
+
+    public void clickAddButton(){
+        try {
+            waitForElementToBeVisible(addButton, 5);
+        } catch (NoSuchElementException n){
+            System.out.print("The add button is not shown");}
+        List<WebElement> addButton = driver.findElements(By.cssSelector("button[id*='add-to-cart']"));
+        elementClick(addButton.get(0));
+        }
+
+        public boolean cartQntUpdated(){
+        String cartText = driver.findElement(By.cssSelector(".shopping_cart_badge")).getText();
+        int cartQnt = Integer.parseInt(cartText);
+        return cartQnt > 0;
+        }
 
     public boolean isGoodsListDysplayed() {
         try {
