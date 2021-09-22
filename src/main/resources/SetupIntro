@@ -1,0 +1,4 @@
+To launch the tests, download the repo from GitHub,
+run command line and go the downloaded project folder,
+run "mvn compile", and than "mvn test"
+
