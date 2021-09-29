@@ -16,12 +16,12 @@ public class BasePage {
 
     public BasePage(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(AppConfig.TIMEOUT));
+        this.wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(AppConfig.TIMEOUT));
         PageFactory.initElements(driver, this);
     }
 
     protected void waitForElementToBeVisible(WebElement element, int timeOut){
-        WebDriverWait configWait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
+        WebDriverWait configWait = new WebDriverWait(driver, Duration.ofSeconds(AppConfig.TIMEOUT));
         configWait.until(ExpectedConditions.visibilityOf(element));
     }
 
