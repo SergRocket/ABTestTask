@@ -22,7 +22,7 @@ public class MainTestClass extends BaseTest {
         loginPage.login(AppConfig.validPassword, AppConfig.validUsername);
         MainPage mainPage = new MainPage(driver);
         mainPage.selectFromLow();
-        mainPage.checkFromLowPrices();
+        Assert.assertTrue(mainPage.checkFromLowPrices());
     }
 
     @TestRails(id="3")
@@ -32,7 +32,7 @@ public class MainTestClass extends BaseTest {
         loginPage.login(AppConfig.validPassword, AppConfig.validUsername);
         MainPage mainPage = new MainPage(driver);
         mainPage.selectFromHigh();
-        mainPage.checkFromHighPrices();
+        Assert.assertTrue(mainPage.checkFromHighPrices());
     }
 
     @TestRails(id="4")
@@ -42,6 +42,6 @@ public class MainTestClass extends BaseTest {
         loginPage.login(AppConfig.validPassword, AppConfig.validUsername);
         MainPage mainPage = new MainPage(driver);
         mainPage.clickAddButton();
-        mainPage.cartQntUpdated();
+        Assert.assertTrue(mainPage.cartQntUpdated());
     }
 }

@@ -11,12 +11,12 @@ import java.time.Duration;
 import java.util.NoSuchElementException;
 
 public class BasePage {
-    public WebDriver driver;
+    WebDriver driver;
     protected WebDriverWait wait;
 
     public BasePage(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(AppConfig.TIMEOUT));
+        this.wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(AppConfig. TIMEOUT));
         PageFactory.initElements(driver, this);
     }
 

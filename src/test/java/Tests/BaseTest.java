@@ -25,7 +25,6 @@ public class BaseTest {
     protected WebDriverWait wait;
     protected APIClient client;
     protected HashMap data;
-
     public static String TESTRAIL_USERNAME = "serg.lishko1988@gmail.com";
     public static String TESTRAIL_PASSWORD = "fg78N7RS";
     public static String RAILS_ENGINE_URL = "https://sergrocketqaa.testrail.io/";
@@ -46,17 +45,13 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeMethod
-    public void beforeLogin(@Optional("chrome") String browser) {
+    public void beforeLogin(@Optional("chrome") String browser,ITestContext ctx, Method method )throws NoSuchMethodException {
         System.out.print(data);
         BrowserFactory browserDriverFactory = new BrowserFactory(browser);
         driver = browserDriverFactory.createDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(AppConfig.TIMEOUT));
         driver.get(AppConfig.startUrl);
         driver.manage().window().maximize();
-    }
-
-    @BeforeMethod
-    public void beforeTest(ITestContext ctx, Method method) throws NoSuchMethodException {
         Method m = MainTestClass.class.getMethod(method.getName());
         if (m.isAnnotationPresent(TestRails.class)) {
             TestRails ta = m.getAnnotation(TestRails.class);
@@ -83,5 +78,11 @@ public class BaseTest {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    @AfterSuite
+    public void tearDownTestRailAndDriver(ITestContext ctx) throws IOException, APIException {
+        Long suiteId = (Long) ctx.getAttribute("suiteId");
+        client.sendPost("close_run/" + suiteId + "/", data);
     }
 }
