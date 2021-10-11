@@ -195,8 +195,7 @@ isPalindrome("ABCDEG");
         String s = Integer.toString(givens);
         int[] counter = new int[2];
         for (int i = 0; i < s.length(); i++) {
-            int digit = Integer.parseInt(
-                    s.substring(i, i + 1));
+            int digit = Integer.parseInt(s.substring(i, i + 1));
             int countIndex = (int)Math.floor(i * 2 / s.length());
             counter[countIndex] += digit;
         }
